@@ -7330,7 +7330,7 @@
     right: 0;
     overflow-y: hidden;
     z-index: 1001;
-    background: #f67e7d;
+    background: rgb(127,7,7);
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -webkit-transition: all 0.5s ease;
@@ -7365,7 +7365,7 @@
       #colorlib-aside #colorlib-logo a {
         display: inline-block;
         text-align: center;
-        color: #000000; }
+        color: white; }
     #colorlib-aside #colorlib-main-menu ul {
       margin: 0;
       padding: 0; }
@@ -7376,7 +7376,7 @@
         font-size: 16px;
         font-weight: 700; }
         #colorlib-aside #colorlib-main-menu ul li a {
-          color: rgba(0, 0, 0, 0.7);
+          color: rgba(255, 255, 255, 0.7);
           text-decoration: none;
           position: relative;
           padding: 10px 0;
@@ -7407,7 +7407,7 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
           #colorlib-aside #colorlib-main-menu ul li a:hover {
             text-decoration: none;
-            color: black; }
+            color: white; }
             #colorlib-aside #colorlib-main-menu ul li a:hover:after {
               visibility: visible;
               -webkit-transform: scaleX(1);

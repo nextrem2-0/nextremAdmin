@@ -8,6 +8,7 @@ import { TablaDatosComponent } from './tabla-datos/tabla-datos.component';
 import { GraficaComponent } from './grafica/grafica.component';
 import { EventoService } from "./evento.service";
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
 //import bootstrap from "bootstrap";
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppComponent,
     TablaDatosComponent,
     GraficaComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

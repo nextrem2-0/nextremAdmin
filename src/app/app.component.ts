@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Administrador de eventos';
+
+  userLogged(){
+    if(localStorage.getItem("user_token") != null){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
