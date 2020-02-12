@@ -24,7 +24,8 @@ export class EventoService {
     for (let data in event){
       params=params.set(data,event[data]);
     }
-    return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/addEvento',{headers:this.headers,params:params});
+    //let info={nombre:event.nombre,resumen:event.resumen,plazas_totales:event.plazas_totales,plazas_ocupadas:event.plazas_ocupadas,precio:event.precio,dificultad:event.dificultad,material:event.material,imagen:event.imagen,deporte_id:event.deporte_id,creador_id:event.creador_id}
+    return this.http.post('http://api.nextrem.pve2.fpmislata.com/public/addEvento',this.headers,event);
   }
   deleteEvent(event){
     return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/borrarEvento/'+event.id,{headers:this.headers});
@@ -34,8 +35,9 @@ export class EventoService {
     for (let data in event){
       params=params.set(data,event[data]);
     }
-    
-    return this.http.patch('http://api.nextrem.pve2.fpmislata.com/public/editarEvento',{headers:this.headers,params:params});
+    //let info={nombre:event.nombre,resumen:event.resumen,plazas_totales:event.plazas_totales,plazas_ocupadas:event.plazas_ocupadas,precio:event.precio,dificultad:event.dificultad,material:event.material,imagen:event.imagen,deporte_id:event.deporte_id,creador_id:event.creador_id}
+
+    return this.http.patch('http://api.nextrem.pve2.fpmislata.com/public/editarEvento',this.headers,event);
   }
   getEventsUser(userId){
       return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/user/'+userId+'/eventosCreados',{headers:this.headers});

@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
     //this.http.get("http://api.nextrem.pve2.fpmislata.com/public/login",httpOptions);
     $.ajax({
       url: "http://api.nextrem.pve2.fpmislata.com/public/login",
-      data: { login: "josito", password: "josito" },
+      data: { login: "monkeySL", password: "monkeySL" },
       success: function (dataResult) {
         localStorage.setItem('user_token', dataResult.token);
         $token = localStorage.getItem('user_token');
