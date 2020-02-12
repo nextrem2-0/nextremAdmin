@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from 'src/assets/scripts/canvasjs.min.js';
+import { UserService } from '../user.service';
+import { EventoService } from "../evento.service";
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-grafica',
@@ -7,11 +10,45 @@ import * as CanvasJS from 'src/assets/scripts/canvasjs.min.js';
   styleUrls: ['./grafica.component.scss']
 })
 export class GraficaComponent implements OnInit {
+  numUsers: any;
+  eventos: any;
+  numEventos: any;
 
-  constructor() {
+  constructor(protected userService: UserService, protected eventoService: EventoService) {
   }
 
   ngOnInit() {
+    //-----------------------------Primeros Datos
+
+    this.userService.getUsers()
+      .subscribe(
+        (data) => { // Success
+          this.numUsers = data;
+
+          this.numUsers = this.numUsers.length;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    this.eventoService.getEventsUser(parseInt(localStorage.getItem("idUser")))
+      .subscribe(
+        (data) => { // Success
+
+          this.eventos = data;
+          console.log(this.eventos);
+          
+          this.numEventos = this.eventos.length;
+          
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    //-----------------------------Gráficas CanvasJS
+
     let chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
@@ -21,6 +58,9 @@ export class GraficaComponent implements OnInit {
       data: [{
         type: "column",
         dataPoints: [
+          /* this.eventos.forEach(evento => {
+            {y: ,label:evento.deporte_id }
+          }) */
           { y: 71, label: "Escalada" },
           { y: 55, label: "Nieve" },
           { y: 50, label: "Surf" },
@@ -37,7 +77,7 @@ export class GraficaComponent implements OnInit {
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: "Monthly Expense"
+        text: "Compras por deporte"
       },
       data: [{
         type: "pie",
@@ -67,10 +107,10 @@ export class GraficaComponent implements OnInit {
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: "Performance Demo - 10000 DataPoints"
+        text: "Nª ventas"
       },
       subtitles: [{
-        text: "Try Zooming and Panning"
+        text: "Último més"
       }],
       data: [
         {
@@ -81,5 +121,7 @@ export class GraficaComponent implements OnInit {
 
     chartdata.render();
   }
+
+  
 }
 

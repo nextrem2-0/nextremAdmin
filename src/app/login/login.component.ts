@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('idUser', dataResult.user.id);
               localStorage.setItem('avatar', dataResult.user.avatar);
 
-              self.router.navigate(['/eventos'])
+              self.router.navigate(['/graficas'])
 
             } else {
               localStorage.removeItem('user_token');

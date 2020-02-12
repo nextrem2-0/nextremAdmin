@@ -10,24 +10,33 @@ export class SidebarComponent implements OnInit {
   options: any;//{"perfil","graficas","eventos"};
   //{ path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' }
   logged: any;
-  constructor() { }
+  
+  constructor() {  }
 
   ngOnInit() {
     this.options = [{ path: "/graficas", title: "Graficas" }, { path: "/eventos", title: "Eventos" }, { path: "/usuarios", title: "Usuarios" }];
     this.logged = localStorage.getItem('user_token');
-    if(this.logged==null){
+   /*  if(this.logged==null){
       this.login();
-    }
-
-
+    } */
+    
+ 
   }
+
+  logoutAction(){
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('idUser');
+    localStorage.removeItem('avatar');
+  }
+
   isMobileMenu() {
     if ($(window).width() > 991) {
       return false;
     }
     return true;
   };
-  login() {
+  /* login() {
     let $token;
     //this.http.get("http://api.nextrem.pve2.fpmislata.com/public/login",httpOptions);
     $.ajax({
@@ -50,6 +59,6 @@ export class SidebarComponent implements OnInit {
       }
 
     });
-  }
+  } */
 
 }

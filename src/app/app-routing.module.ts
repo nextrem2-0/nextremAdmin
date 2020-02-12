@@ -7,6 +7,7 @@ import { GraficaComponent } from './grafica/grafica.component';
 
 
 const routes: Routes = [
+  { path: "", component: GraficaComponent},
   { path: 'eventos', component: TablaDatosComponent },
   { path: "graficas", component: GraficaComponent},
   { path: "usuarios", component: TablaDatosComponent}
