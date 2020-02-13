@@ -24,10 +24,10 @@
                                     <td class="editableField precio">{{event.precio}}</td>
                                     <td class="editableField dificultad">{{event.dificultad}}</td>
                                     <td class="editableField material">{{event.material}}</td>
-                                    <td class="editableField imagen">
+                                    <!-- <td class="editableField imagen">
                                         
                                     <input id="image" type="file" />
-                                    </td>
+                                    </td> -->
                                     <td class="editableField deporte">{{event.deporte_id}}</td>
                                     <td>
                                         <div id="btnEdit" class="btn btn-primary" (click)="setEditable(event)">Edit
@@ -45,7 +45,7 @@
                                     <td class="editableField precio"></td>
                                     <td class="editableField dificultad"></td>
                                     <td class="editableField material"></td>
-                                    <td class="editableField imagen"><input id="image" type="file" /></td>
+                                    <!-- <td class="editableField imagen"><input id="image" type="file" /></td> -->
                                     <td class="editableField deporte"></td>
                                     <td>
                                         <div id="btnNew" class="btn btn-primary" (click)="addEvent()">New</div>
@@ -60,9 +60,9 @@
                                     <td class="editableField username">{{user.username}}</td>
                                     <td class="editableField email">{{user.email}}</td>
                                     <td class="editableField password">{{user.password}}</td>
-                                    <td class="editableField avatar"><input style="display:none" id="image"  type="file" (change)="subirImagen()"
-                                            accept="image/*">{{user.avatar}}</td>
-                                    <td>
+                                    <!-- <td class="editableField avatar"><input style="display:none" id="image"  type="file" (change)="subirImagen()"
+                                            accept="image/*">{{user.avatar}}</td>-->
+                                    <td> 
                                         <div id="btnEdit" class="btn btn-primary" (click)="setEditable(user)">Edit</div>
                                         <div id="btnDelete" class="btn btn-danger" (click)="deleteEvent(user)">Delete
                                         </div>
@@ -74,7 +74,7 @@
                                     <td class="editableField username"></td>
                                     <td class="editableField email"></td>
                                     <td class="editableField password"></td>
-                                    <td class="editableField avatar"><input id="image" type="file" /></td>
+                                    <!-- <td class="editableField avatar"><input id="image" type="file" /></td> -->
                                     <td>
                                         <div id="btnNew" class="btn btn-primary" (click)="addEvent()">New</div>
                                     </td>

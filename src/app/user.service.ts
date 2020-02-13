@@ -16,14 +16,8 @@ export class UserService {
       return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/usuarios',{headers:this.headers});
   }
   addUser(user){
-    let params= new HttpParams();
-    let info;
-    for (let data in user){
-      params=params.set(data,user[data]);
-    }
-    console.log(user);
     
-    return this.http.post('http://api.nextrem.pve2.fpmislata.com/public/register',this.headers,user);
+    //return this.http.post('http://api.nextrem.pve2.fpmislata.com/public/register',{headers:this.headers,params:user});
   }
   deleteUser(user){
     return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/borrarUser'+user.id,{headers:this.headers});
@@ -33,6 +27,6 @@ export class UserService {
     for (let data in user){
       params=params.set(data,user[data]);
     }
-    return this.http.post('http://api.nextrem.pve2.fpmislata.com/public/editarPerfil',{headers:this.headers,params:params,contentType:false,processData:false,dataType:"json"});
+    return this.http.get('http://api.nextrem.pve2.fpmislata.com/public/editarPerfil',{headers:this.headers,params:params});
   }
 }

@@ -22,7 +22,7 @@ export class TablaDatosComponent implements OnInit {
   evt: any;
   ngOnInit() {
     if (this.router.url === "/eventos") {
-      this.header = ["id", "nombre", "resumen", "plazas totales", "plazas ocupadas", "precio", "dificultad", "material", "imagen", "deporte id", ""];
+      this.header = ["id", "nombre", "resumen", "plazas totales", "plazas ocupadas", "precio", "dificultad", "material", "deporte id", ""];
       this.title = "Eventos";
 
       this.eventoService.getEventsUser(parseInt(localStorage.getItem("idUser")))
@@ -38,7 +38,7 @@ export class TablaDatosComponent implements OnInit {
     } else if (this.router.url === "/usuarios") {
       this.title = "Usuarios";
 
-      this.header = ["id", "empresa", "username", "email", "password", "avatar", ""];
+      this.header = ["id", "empresa", "username", "email", ""];
       this.userService.getUsers()
         .subscribe(
           (data) => { // Success
@@ -58,7 +58,7 @@ export class TablaDatosComponent implements OnInit {
     if (this.router.url === "/eventos") {
       if ($("#" + event.id).find(".editableField").attr("contenteditable") == "true") {
         $("#" + event.id).find(".editableField").attr("contenteditable", false);
-        $("#image").hide();
+        //$("#image").hide();
         let form = new FormData();
         let nombre = $("#" + event.id).find(".nombre").text();
         let resumen = $("#" + event.id).find(".resumen").text();
@@ -68,10 +68,10 @@ export class TablaDatosComponent implements OnInit {
         let dificultad = parseInt($("#" + event.id).find(".dificultad").text());
         let material = parseInt($("#" + event.id).find(".material").text());
          
-        if($("#image")[0].files[0] !== undefined){
-          let imagen = $("#image")[0].files[0];
-          form.append("imagen",imagen);
-        }
+        // if($("#image")[0].files[0] !== undefined){
+        //   let imagen = $("#image")[0].files[0];
+        //   form.append("imagen",imagen);
+        // }
         let deporte_id = parseInt($("#" + event.id).find(".deporte").text());
         
           form.append('nombre', nombre);
@@ -82,54 +82,59 @@ export class TablaDatosComponent implements OnInit {
           form.append('material', material.toString());
           form.append('resumen', resumen);
           form.append('deporte_id', deporte_id.toString());
-            $.ajax({
-          url: "http://api.nextrem.pve2.fpmislata.com/public/editarEvento",
-          //data: { isbusiness: $boolBusiness, username: $("#user").val(), email: $("#email").val(), password: $("#pass_register").val(), password_confirmation: $("#pass_confirm_register").val(), avatar: $("#fileRegister")[0].files[0] },
-          type: 'patch',
-          dataType : 'json',
-          contentType: false,
-          processData: false,
-          data: form,
-          success: function (dataResult) {
-            console.log(dataResult);
+          let evt={ nombre:nombre,
+            resumen:resumen,
+          plazas_totales:plazas_totales,
+          plazas_ocupadas:plazas_ocupadas,
+          precio:precio,
+          dificultad:dificultad,
+           material:material,deporte_id:deporte_id,creador_id:localStorage.getItem("idUser")};
+      //       $.ajax({
+      //     url: "http://api.nextrem.pve2.fpmislata.com/public/editarEvento",
+      //     //data: { isbusiness: $boolBusiness, username: $("#user").val(), email: $("#email").val(), password: $("#pass_register").val(), password_confirmation: $("#pass_confirm_register").val(), avatar: $("#fileRegister")[0].files[0] },
+      //     headers: { 'Authorization': 'Bearer ' + localStorage.getItem("user_token") },
+      //     data: evt,
+      //     success: function (dataResult) {
+      //       console.log(dataResult);
             
-          },
-          error: function (e) {
-              console.log(e);
+      //     },
+      //     error: function (e) {
+      //         console.log(e);
               
-          }
-      });
-        // this.eventoService.updateEvent(form).subscribe((data) => { // Success
-        //   console.log(data);
+      //     }
+      // });
+     
+        this.eventoService.updateEvent(evt).subscribe((data) => { // Success
+          console.log(data);
           
-        // },
-        //   (error) => {
-        //     console.error(error);
-        //   });
+        },
+          (error) => {
+            console.error(error);
+          });
 
         $("#btnEdit").html("Edit");
         $("#btnDelete").html("Delete");
       } else {
         $("#" + event.id).find(".editableField").attr("contenteditable", true);
         //$("#" + event.id).find(".id").attr("contenteditable", false);
-        $("#image").show();
+        //$("#image").show();
         $("#btnEdit").html("Save");
         $("#btnDelete").html("Undo");
       }
     } else if (this.router.url === "/usuarios") {
       if ($("#" + event.id).find(".editableField").attr("contenteditable") == "true") {
         $("#" + event.id).find(".editableField").attr("contenteditable", false);
-        $("#image").hide();
+        //$("#image").hide();
         let form = new FormData();
         let isbusiness = $("#" + event.id).find(".isbusiness").text();
         let username = $("#" + event.id).find(".username").text();
         let email = $("#" + event.id).find(".email").text();
         let password = $("#" + event.id).find(".password").text();
         
-        if($("#image")[0].files[0] !== undefined){
-          let avatar = $("#image")[0].files[0]
-          form.append("avatar",avatar);
-        }
+        // if($("#image")[0].files[0] !== undefined){
+        //   let avatar = $("#image")[0].files[0]
+        //   form.append("avatar",avatar);
+        // }
         
         form.append('isbusiness', isbusiness);
         form.append('username', username);
@@ -169,7 +174,7 @@ export class TablaDatosComponent implements OnInit {
         $("#" + event.id).find(".precio").text(event.precio);
         $("#" + event.id).find(".dificultad").text(event.dificultad);
         $("#" + event.id).find(".material").text(event.material);
-        $("#" + event.id).find(".imagen").text(event.imagen),
+       // $("#" + event.id).find(".imagen").text(event.imagen),
           $("#" + event.id).find(".deporte").text(event.deporte_id);
 
 
@@ -183,7 +188,7 @@ export class TablaDatosComponent implements OnInit {
         $("#" + event.id).find(".username").text(event.username);
         $("#" + event.id).find(".email").text(event.email);
         $("#" + event.id).find(".password").text(event.password);
-        $("#" + event.id).find(".avatar").text(event.avatar);
+        //$("#" + event.id).find(".avatar").text(event.avatar);
 
 
         $("#btnDelete").html("Delete");
@@ -218,10 +223,10 @@ export class TablaDatosComponent implements OnInit {
         let precio = parseFloat($("#new").find(".precio").text());
         let dificultad = parseInt($("#new").find(".dificultad").text());
         let material = parseInt($("#new").find(".material").text());
-        if($("#image")[0].files[0] !== undefined){
-        let imagen = $("#image")[0].files[0];
-        form.append('imagen', imagen);
-        }
+        // if($("#image")[0].files[0] !== undefined){
+        // let imagen = $("#image")[0].files[0];
+        // form.append('imagen', imagen);
+        // }
         let deporte_id = parseInt($("#new").find(".deporte").text());
         
         form.append('nombre', nombre);
@@ -249,8 +254,15 @@ export class TablaDatosComponent implements OnInit {
               
       //     }
       // });
-
-        this.eventoService.addEvent(form).subscribe((data) => { // Success
+        let event={ nombre:nombre,
+          resumen:resumen,
+        plazas_totales:plazas_totales,
+        plazas_ocupadas:plazas_ocupadas,
+        precio:precio,
+        dificultad:dificultad,
+         material:material,deporte_id:deporte_id,creador_id:localStorage.getItem("idUser")};
+         
+        this.eventoService.addEvent(event).subscribe((data) => { // Success
           console.log(data);
           //location.reload();
           
@@ -264,27 +276,37 @@ export class TablaDatosComponent implements OnInit {
         let username = $("#new").find(".username").text();
         let email = $("#new").find(".email").text();
         let password = $("#new").find(".password").text();
-        if($("#image")[0].files[0] !== undefined){
-        let avatar = $("#image")[0].files[0];
-        form.append('avatar', avatar);
-        }
+        let confirm=password;
+        // if($("#image")[0].files[0] !== undefined){
+        // let avatar = $("#image")[0].files[0];
+        // form.append('avatar', avatar);
+        // }
         form.append('isbusiness', isbusiness);
         form.append('username', username);
         form.append('email', email);
         form.append('password', password);
-        console.log($("#image"));
+        form.append("password_confirmation",confirm);
+        //console.log($("#image"));
         
 
         
-        this.userService.addUser(form).subscribe((data) => { // Success
-
-
-          console.log(data);
-          location.reload();
-        },
-          (error) => {
-            console.error(error);
-          });
+        $.ajax({
+          url: "http://api.nextrem.pve2.fpmislata.com/public/register",
+          //data: { isbusiness: $boolBusiness, username: $("#user").val(), email: $("#email").val(), password: $("#pass_register").val(), password_confirmation: $("#pass_confirm_register").val(), avatar: $("#fileRegister")[0].files[0] },
+          type: 'post',
+          dataType : 'json',
+          contentType: false,
+          processData: false,
+          data: form,
+          success: function (dataResult) {
+            console.log(dataResult);
+            
+          },
+          error: function (e) {
+              console.log(e);
+              
+          }
+      });
       }
       $("#new").find(".editableField").attr("contenteditable", false);
       $("#btnNew").html("New");
